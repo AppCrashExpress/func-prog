@@ -1,0 +1,133 @@
+\documentclass[12pt]{article}
+
+\usepackage{fullpage}
+\usepackage{multicol,multirow}
+\usepackage{tabularx}
+\usepackage{ulem}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% For source code output
+\usepackage{xcolor}
+\usepackage{minted}
+
+\usepackage{titlesec}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection.}{0.3em}{}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection.}{0.3em}{}
+
+\titlespacing{\section}{0pt}{*2}{*2}
+\titlespacing{\subsection}{0pt}{*1}{*1}
+\titlespacing{\subsubsection}{0pt}{*0}{*0}
+\usepackage{listings}
+\lstloadlanguages{Lisp}
+\lstset{extendedchars=false,
+	breaklines=true,
+	breakatwhitespace=true,
+	keepspaces = true,
+	tabsize=2
+}
+\begin{document}
+
+
+\section*{Отчет по лабораторной работе №\,4 
+по курсу \guillemotleft  Функциональное программирование\guillemotright}
+\begin{flushright}
+Студент группы 8О-307 МАИ \textit{Ефимов Александр}, \textnumero 7 по списку \\
+\makebox[7cm]{Контакты: {\tt aleks.efimov2011@yandex.ru} \hfill} \\
+\makebox[7cm]{Работа выполнена: 02.04.2021 \hfill} \\
+\ \\
+Преподаватель: Иванов Дмитрий Анатольевич, доц. каф. 806 \\
+\makebox[7cm]{Отчет сдан: \hfill} \\
+\makebox[7cm]{Итоговая оценка: \hfill} \\
+\makebox[7cm]{Подпись преподавателя: \hfill} \\
+
+\end{flushright}
+
+\section{Тема работы}
+Знаки и строки
+
+\section{Цель работы}
+Научиться работать с литерами (знаками) и строками при помощи функций 
+обработки строк и общих функций работы с последовательностями.
+
+\section{Задание}
+
+Вариант: №4.34
+
+Запрограммировать на языке Коммон Лисп функцию, принимающую один аргумент - 
+текст.
+
+Если в тексте нет знака $*$, то функция должна вернуть этот текст без изменения. 
+В противном случае функция должна вернуть копию текста, в котором все малые 
+буквы, предшествующие первому вхождению $*$, заменены на цифру 3.
+
+Функция должна работать как для малых латинских, так и малых русских букв.
+
+\section{Оборудование студента}
+Процессор Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz, память: 7.6Gi, разрядность 
+системы: 64.
+
+\section{Программное обеспечение}
+ОС Arch Linux, система CLisp.
+
+\section{Идея, метод, алгоритм}
+
+Сначала реализовать функцию, которая ищет в строки позицию первого вхождения $*$. 
+Если она не найдена, вернуть строку. Иначе, разбить строку на две подстроки 
+до и с $*$ в начале. После замены в первой строки всех букв нижнего регистра
+на 3 вернуть объединение этой подстроки со второй (где $*$).
+
+Обобщить эту функцию для текста: найти предложение, где содержится $*$ и 
+сделать объединение трех списков
+\begin{enumerate}
+    \item Список предложений до $*$, где все буквы нижнего регистра 
+    заменены на 3;
+    \item Список с предложением с $*$, обработанным ранее описанной функцией;
+    \item Список со всеми оставшимися предложениями.
+\end{enumerate}
+
+Предложение с $*$ необходимо обернуть в список для корректной работы функции 
+\textit{concatenate}.
+
+\section{Сценарий выполнения работы}
+
+\section{Распечатка программы и её результаты}
+
+\subsection{Исходный код}
+\inputminted[linenos, frame=lines]{lisp}{./editor.lisp}
+
+\subsection{Результаты работы}
+\inputminted[frame=lines]{lisp}{./log.lisp}
+
+\section{Дневник отладки}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Дата & Событие & Действие по исправлению & Примечание \\
+\hline
+\end{tabular}
+
+\section{Замечания автора по существу работы}
+
+\section{Выводы}
+% \begin{minted}{text}
+% Take me down to the Haskell city
+% Where the brackets are little
+% And syntax is pretty
+% Oh won't you please take me home?
+% \end{minted}
+
+\begin{itemize}
+    \item Манипуляции над строками облегчаются за счет применения
+    функций \textit{map} и \textit{position};
+    \item Строки можно разбивать на подстроки и работать с ними
+    без ограничения общности.
+\end{itemize}
+
+\end{document}
+

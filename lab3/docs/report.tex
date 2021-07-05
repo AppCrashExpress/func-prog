@@ -1,0 +1,242 @@
+\documentclass[12pt]{article}
+
+\usepackage{fullpage}
+\usepackage{multicol,multirow}
+\usepackage{tabularx}
+\usepackage{ulem}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{graphicx}
+\usepackage{wrapfig}
+
+% For source code output
+\usepackage{xcolor}
+\usepackage{minted}
+
+\usepackage{titlesec}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection.}{0.3em}{}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection.}{0.3em}{}
+
+\titlespacing{\section}{0pt}{*2}{*2}
+\titlespacing{\subsection}{0pt}{*1}{*1}
+\titlespacing{\subsubsection}{0pt}{*0}{*0}
+
+\begin{document}
+
+\section*{Отчет по лабораторной работе №\,3 
+по курсу \guillemotleft  Функциональное программирование\guillemotright}
+\begin{flushright}
+Студент группы 8О-307 МАИ \textit{Ефимов Александр}, \textnumero 7 по списку \\
+\makebox[7cm]{Контакты: {\tt aleks.efimov2011@yandex.ru} \hfill} \\
+\makebox[7cm]{Работа выполнена: 26.03.2021 \hfill} \\
+\ \\
+Преподаватель: Иванов Дмитрий Анатольевич, доц. каф. 806 \\
+\makebox[7cm]{Отчет сдан: \hfill} \\
+\makebox[7cm]{Итоговая оценка: \hfill} \\
+\makebox[7cm]{Подпись преподавателя: \hfill} \\
+
+\end{flushright}
+
+\section{Тема работы}
+Последовательности, массивы и управляющие конструкции Common Lisp.
+
+\section{Цель работы}
+Научиться создавать векторы и массивы для представления матриц, освоить общие функции работы с последовательностями, инструкции цикла и нелокального выхода.
+
+\section{Задание}
+
+\begin{wrapfigure}{r}{0.35\textwidth}
+    \centering
+    \includegraphics[width=0.25\textwidth]{task-arr.png}
+\end{wrapfigure}
+
+Вариант: №3.45
+
+Запрограммировать на языке Коммон Лисп функцию, принимающую в качестве 
+единственного аргумента целое число $n$ - порядок матрицы. Функция должна 
+создавать и возвращать двумерный массив, представляющий целочисленную 
+квадратную матрицу порядка $n$, элементами которой являются числа $1, 2, ... n^2$, 
+расположенные по схеме, показанной на рисунке.
+
+\section{Оборудование студента}
+Процессор Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz, память: 7.6Gi, разрядность системы: 64.
+
+\section{Программное обеспечение}
+ОС Arch Linux, система CLisp.
+
+\section{Идея, метод, алгоритм}
+
+После создания матрицы, ее можно заполнить пошагово сначала над антидиагональю (диагональ
+противоположная главной) следующим алгоритмом:
+
+\begin{enumerate}
+    \item Приравнять текущий элемент к текущему шагу;
+    \item Проверить четность-нечетность текущей побочной диагонали:
+    \begin{itemize}
+        \item Если четная, то спуститься до границы или перейти на следующую диагональ,
+        если спускаться некуда;
+        \item Иначе также, по подниматься.
+    \item Перейти к шагу 1 если антидиагональ не достигнута
+    \end{itemize}
+\end{enumerate}
+
+Второй цикл отличается от первого только двумя изменениями:
+
+\begin{enumerate}
+    \item В то время как первый цикл продолжался до достижения антидиагонали, этот
+    цикл продолжается пока общее число выполненных шагов не равно $n^2$;
+    \item Переход на следующую диагональ производится с учетом того, что мы на границе.
+\end{enumerate}
+
+\section{Сценарий выполнения работы}
+
+\section{Распечатка программы и её результаты}
+
+\subsection{Исходный код}
+\inputminted[linenos, frame=lines]{lisp}{./zig-zag.lisp}\documentclass[12pt]{article}
+
+\usepackage{fullpage}
+\usepackage{multicol,multirow}
+\usepackage{tabularx}
+\usepackage{ulem}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% For source code output
+\usepackage{xcolor}
+\usepackage{minted}
+
+\usepackage{titlesec}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection.}{0.3em}{}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection.}{0.3em}{}
+
+\titlespacing{\section}{0pt}{*2}{*2}
+\titlespacing{\subsection}{0pt}{*1}{*1}
+\titlespacing{\subsubsection}{0pt}{*0}{*0}
+\usepackage{listings}
+\lstloadlanguages{Lisp}
+\lstset{extendedchars=false,
+	breaklines=true,
+	breakatwhitespace=true,
+	keepspaces = true,
+	tabsize=2
+}
+\begin{document}
+
+
+\section*{Отчет по лабораторной работе №\,2 
+по курсу \guillemotleft  Функциональное программирование\guillemotright}
+\begin{flushright}
+Студент группы 8О-307 МАИ \textit{Ефимов Александр}, \textnumero 7 по списку \\
+\makebox[7cm]{Контакты: {\tt aleks.efimov2011@yandex.ru} \hfill} \\
+\makebox[7cm]{Работа выполнена: 12.03.2021 \hfill} \\
+\ \\
+Преподаватель: Иванов Дмитрий Анатольевич, доц. каф. 806 \\
+\makebox[7cm]{Отчет сдан: \hfill} \\
+\makebox[7cm]{Итоговая оценка: \hfill} \\
+\makebox[7cm]{Подпись преподавателя: \hfill} \\
+
+\end{flushright}
+
+\section{Тема работы}
+Простейшие функции работы со списками Коммон Лисп
+
+\section{Цель работы}
+Научиться конструировать списки, находить элемент в списке, использовать схему линейной и 
+древовидной рекурсии для обхода и реконструкции плоских списков и деревьев.
+
+\section{Задание}
+
+Вариант: №2.36
+
+Дан список действительных чисел ($X_1 ... X_n$).
+Запрограммируйте рекурсивно на языке Common Lisp функцию, которая возвращает:
+
+\begin{itemize}
+    \item  сам список, если последовательность $X_1, ..., X_n$ упорядочена по убыванию,
+    т.е. $X_1 > X_2 > ... > X_n$;
+    \item  список ($X_n ... X_1$) в противном случае.
+\end{itemize}
+
+
+\section{Оборудование студента}
+Процессор Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz, память: 7.6Gi, разрядность системы: 64.
+
+\section{Программное обеспечение}
+ОС Arch Linux, система CLisp.
+
+\section{Идея, метод, алгоритм}
+
+Проверить, если значения в списке убывают. Причем, если размер списка меньше двух, считать,
+что он убывающий.
+
+Вернуть его же, если он убывающий, или обратить иначе.
+
+% \section{Сценарий выполнения работы}
+
+\section{Распечатка программы и её результаты}
+
+\subsection{Исходный код}
+\inputminted[linenos, frame=lines]{lisp}{./descend-reverse.lisp}
+
+\subsection{Результаты работы}
+\inputminted[frame=lines]{lisp}{./log.lisp}
+
+% \section{Дневник отладки}
+% \begin{tabular}{|c|c|c|c|}
+% \hline
+% Дата & Событие & Действие по исправлению & Примечание \\
+% \hline
+% \end{tabular}
+
+% \section{Замечания автора по существу работы}
+
+\section{Выводы}
+% \begin{minted}{text}
+% Take me down to the Haskell city
+% Where the brackets are little
+% And syntax is pretty
+% Oh won't you please take me home?
+% \end{minted}
+По спискам можно итерировать с помощью функций \textit{first} и \textit{rest}.
+
+\end{document}
+
+
+\subsection{Результаты работы}
+\inputminted[frame=lines]{lisp}{./log.lisp}
+
+\section{Дневник отладки}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Дата & Событие & Действие по исправлению & Примечание \\
+\hline
+\end{tabular}
+
+\section{Замечания автора по существу работы}
+
+\section{Выводы}
+
+\begin{itemize}
+    \item Создание матрицы производиться через функцию \textit{make-array};
+    \item Цикл \textit{loop} является смесью императивного и функционального 
+    программирования;
+    \item И \textit{let}, и \textit{loop} могут иметь в своем теле неограниченное 
+    число вызовов. 
+\end{itemize}
+
+\end{document}
+

@@ -1,0 +1,124 @@
+\documentclass[12pt]{article}
+
+\usepackage{fullpage}
+\usepackage{multicol,multirow}
+\usepackage{tabularx}
+\usepackage{ulem}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% For source code output
+\usepackage{xcolor}
+\usepackage{minted}
+
+\usepackage{titlesec}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection.}{0.3em}{}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection.}{0.3em}{}
+
+\titlespacing{\section}{0pt}{*2}{*2}
+\titlespacing{\subsection}{0pt}{*1}{*1}
+\titlespacing{\subsubsection}{0pt}{*0}{*0}
+\usepackage{listings}
+\lstloadlanguages{Lisp}
+\lstset{extendedchars=false,
+	breaklines=true,
+	breakatwhitespace=true,
+	keepspaces = true,
+	tabsize=2
+}
+\begin{document}
+
+
+\section*{Отчет по лабораторной работе №\,1 
+по курсу \guillemotleft  Функциональное программирование\guillemotright}
+\begin{flushright}
+Студент группы 8О-307 МАИ \textit{Ефимов Александр}, \textnumero 7 по списку \\
+\makebox[7cm]{Контакты: {\tt aleks.efimov2011@yandex.ru} \hfill} \\
+\makebox[7cm]{Работа выполнена: 27.02.2021 \hfill} \\
+\ \\
+Преподаватель: Иванов Дмитрий Анатольевич, доц. каф. 806 \\
+\makebox[7cm]{Отчет сдан: \hfill} \\
+\makebox[7cm]{Итоговая оценка: \hfill} \\
+\makebox[7cm]{Подпись преподавателя: \hfill} \\
+
+\end{flushright}
+
+\section{Тема работы}
+Примитивные функции и особые операторы Common Lisp.
+
+\section{Цель работы}
+Научиться вводить S-выражения в Lisp-систему, определять переменные и функции, работать с условными
+операторами, работать с числами, используя схему линейной и древовидной рекурсии.
+
+\section{Задание (вариант №1.45)}
+С помощью формулы
+
+$$
+\frac{1}{3} \left(\frac{x}{y^2} + 2y\right) 
+$$
+
+запрограммируйте на языке Common Lisp функцию для вычисления кубического корня. Причем y является
+приближением к кубическому корню из х.
+
+Использовать функции {\tt good-enough-p}, {\tt improve} и {\tt cube}.
+
+\section{Оборудование студента}
+Процессор Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz, память: 7.6Gi, разрядность системы: 64.
+
+\section{Программное обеспечение}
+ОС Arch Linux, утилита CLisp.
+
+\section{Идея, метод, алгоритм}
+Формула, предоставленная в задании, выводится из метода Ньютона, а именно: необходимо найти
+некоторый $x$ \--- кубический корень числа $a$ такой, что $x^3 = a$. Если это обозначить за 
+функцию: 
+$$
+f(x) = x^3 - a
+$$
+то с помощью метода Ньютона можно итеративно найти кубический корень:
+
+$$
+x_{k + 1} = x_{k} - \frac{f(x_{k})}{f'(x_{k})} 
+          = x_{k} - \frac{x_{k}^3 - a}{3x_{k}^2}
+          = \frac{3x_{k}^3 - x_{k}^3 + a}{3x_{k}^2} 
+          = \frac{1}{3}\left(2x_{k} + \frac{a}{x_{k}^2}\right)
+$$
+
+Каждое новое значение $x_{k + 1}$ может иметь тип \textit{float}, поэтому его нужно сравнивать
+с оригиналом в пределах машинного (или заданного разработчиком) эпсилона.
+
+% \section{Сценарий выполнения работы}
+
+\section{Распечатка программы и её результаты}
+
+\subsection{Исходный код}
+% \lstinputlisting{./cuberoot.lisp}
+\inputminted[linenos, frame=lines]{lisp}{./cuberoot.lisp}
+
+\subsection{Результаты работы}
+% \lstinputlisting{./log.lisp}
+\inputminted[frame=lines]{lisp}{./log.lisp}
+
+% \section{Дневник отладки}
+% \begin{tabular}{|c|c|c|c|}
+% \hline
+% Дата & Событие & Действие по исправлению & Примечание \\
+% \hline
+% \end{tabular}
+
+\section{Замечания автора по существу работы}
+Сложность работы искусственно увеличивается ввиду её плохой описанности. Следует
+хотя бы упомянуть используемый для решении метод Ньютона для упрощения.
+
+\section{Выводы}
+При итеративном делении нужно быть аккуратным не передавать переменные с типом \textit{rational},
+иначе можно быстро получить ошибку переполнения.
+
+\end{document}
+

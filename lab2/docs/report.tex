@@ -1,0 +1,115 @@
+\documentclass[12pt]{article}
+
+\usepackage{fullpage}
+\usepackage{multicol,multirow}
+\usepackage{tabularx}
+\usepackage{ulem}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% For source code output
+\usepackage{xcolor}
+\usepackage{minted}
+
+\usepackage{titlesec}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection.}{0.3em}{}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection.}{0.3em}{}
+
+\titlespacing{\section}{0pt}{*2}{*2}
+\titlespacing{\subsection}{0pt}{*1}{*1}
+\titlespacing{\subsubsection}{0pt}{*0}{*0}
+\usepackage{listings}
+\lstloadlanguages{Lisp}
+\lstset{extendedchars=false,
+	breaklines=true,
+	breakatwhitespace=true,
+	keepspaces = true,
+	tabsize=2
+}
+\begin{document}
+
+
+\section*{Отчет по лабораторной работе №\,2 
+по курсу \guillemotleft  Функциональное программирование\guillemotright}
+\begin{flushright}
+Студент группы 8О-307 МАИ \textit{Ефимов Александр}, \textnumero 7 по списку \\
+\makebox[7cm]{Контакты: {\tt aleks.efimov2011@yandex.ru} \hfill} \\
+\makebox[7cm]{Работа выполнена: 12.03.2021 \hfill} \\
+\ \\
+Преподаватель: Иванов Дмитрий Анатольевич, доц. каф. 806 \\
+\makebox[7cm]{Отчет сдан: \hfill} \\
+\makebox[7cm]{Итоговая оценка: \hfill} \\
+\makebox[7cm]{Подпись преподавателя: \hfill} \\
+
+\end{flushright}
+
+\section{Тема работы}
+Простейшие функции работы со списками Коммон Лисп
+
+\section{Цель работы}
+Научиться конструировать списки, находить элемент в списке, использовать схему линейной и 
+древовидной рекурсии для обхода и реконструкции плоских списков и деревьев.
+
+\section{Задание}
+
+Вариант: №2.36
+
+Дан список действительных чисел ($X_1 ... X_n$).
+Запрограммируйте рекурсивно на языке Common Lisp функцию, которая возвращает:
+
+\begin{itemize}
+    \item  сам список, если последовательность $X_1, ..., X_n$ упорядочена по убыванию,
+    т.е. $X_1 > X_2 > ... > X_n$;
+    \item  список ($X_n ... X_1$) в противном случае.
+\end{itemize}
+
+
+\section{Оборудование студента}
+Процессор Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz, память: 7.6Gi, разрядность системы: 64.
+
+\section{Программное обеспечение}
+ОС Arch Linux, система CLisp.
+
+\section{Идея, метод, алгоритм}
+
+Проверить, если значения в списке убывают. Причем, если размер списка меньше двух, считать,
+что он убывающий.
+
+Вернуть его же, если он убывающий, или обратить иначе.
+
+% \section{Сценарий выполнения работы}
+
+\section{Распечатка программы и её результаты}
+
+\subsection{Исходный код}
+\inputminted[linenos, frame=lines]{lisp}{./descend-reverse.lisp}
+
+\subsection{Результаты работы}
+\inputminted[frame=lines]{lisp}{./log.lisp}
+
+% \section{Дневник отладки}
+% \begin{tabular}{|c|c|c|c|}
+% \hline
+% Дата & Событие & Действие по исправлению & Примечание \\
+% \hline
+% \end{tabular}
+
+% \section{Замечания автора по существу работы}
+
+\section{Выводы}
+% \begin{minted}{text}
+% Take me down to the Haskell city
+% Where the brackets are little
+% And syntax is pretty
+% Oh won't you please take me home?
+% \end{minted}
+По спискам можно итерировать с помощью функций \textit{first} и \textit{rest}.
+
+\end{document}
+
